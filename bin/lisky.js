@@ -65,9 +65,7 @@ switch (process.argv[2]) {
 	// continue...
 }
 
-// eslint-disable-next-line import/extensions,import/no-unresolved
 const lisky = require('../dist').default;
-// eslint-disable-next-line import/extensions,import/no-unresolved
 const execFile = require('../dist/exec_file').default;
 
 // eslint-disable-next-line no-underscore-dangle

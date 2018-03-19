@@ -6,16 +6,16 @@ pipeline {
 				sh 'npm install --verbose'
 			}
 		}
+		stage('Build') {
+			steps {
+				sh 'npm run build' // Running build first, since "bin" requires reference to the "dist" folder
+			}
+		}
 		stage('Run lint') {
 			steps {
 				ansiColor('xterm') {
 					sh 'npm run lint'
 				}
-			}
-		}
-		stage('Build') {
-			steps {
-				sh 'npm run build'
 			}
 		}
 		stage('Run tests') {
