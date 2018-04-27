@@ -31,14 +31,16 @@ describe('set command', () => {
 						'a config with unknown properties',
 						given.aConfigWithUnknownProperties,
 						() => {
-							Given('a variable "api.node"', given.aVariable, () => {
-								Given('a value "true"', given.aValue, () => {
+							Given('a variable "api.nodes"', given.aVariable, () => {
+								Given('values "true"', given.values, () => {
 									When(
-										'the action is called with the variable and the value',
-										when.theActionIsCalledWithTheVariableAndTheValue,
+										'the action is called with the variable and the values',
+										when.theActionIsCalledWithTheVariableAndTheValues,
 										() => {
 											Then(
-												"it should reject with validation error and message \"Config file could not be written: property 'api.node' was not found. It looks like your configuration file is corrupted. Please check the file or run 'lisky clean' to remove it (a fresh default configuration file will be created when you run Lisky again).\"",
+												`it should reject with validation error and message "Config file could not be written: property 'api.nodes' was not found. It looks like your configuration file is corrupted. Please check the file at ${
+													process.env.LISKY_CONFIG_DIR
+												}/config.json or remove it (a fresh default configuration file will be created when you run Lisky again)."`,
 												then.itShouldRejectWithValidationErrorAndMessage,
 											);
 										},
@@ -49,10 +51,10 @@ describe('set command', () => {
 					);
 					Given('a config', given.aConfig, () => {
 						Given('an unknown variable "xxx"', given.anUnknownVariable, () => {
-							Given('a value "true"', given.aValue, () => {
+							Given('values "true"', given.values, () => {
 								When(
-									'the action is called with the variable and the value',
-									when.theActionIsCalledWithTheVariableAndTheValue,
+									'the action is called with the variable and the values',
+									when.theActionIsCalledWithTheVariableAndTheValues,
 									() => {
 										Then(
 											'it should reject with validation error and message "Unsupported variable name."',
@@ -65,8 +67,8 @@ describe('set command', () => {
 						Given('a variable "json"', given.aVariable, () => {
 							Given('an unknown value "xxx"', given.anUnknownValue, () => {
 								When(
-									'the action is called with the variable and the value',
-									when.theActionIsCalledWithTheVariableAndTheValue,
+									'the action is called with the variable and the values',
+									when.theActionIsCalledWithTheVariableAndTheValues,
 									() => {
 										Then(
 											'it should reject with validation error and message "Value must be a boolean."',
@@ -75,7 +77,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "true"', given.aValue, () => {
+							Given('values "true"', given.values, () => {
 								Given(
 									'the config file cannot be written',
 									given.theConfigFileCannotBeWritten,
@@ -85,8 +87,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -101,8 +103,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean true',
@@ -131,8 +133,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean true',
@@ -155,8 +157,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean true',
@@ -177,7 +179,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "false"', given.aValue, () => {
+							Given('values "false"', given.values, () => {
 								Given(
 									'the config file cannot be written',
 									given.theConfigFileCannotBeWritten,
@@ -187,8 +189,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -203,8 +205,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean false',
@@ -233,8 +235,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean false',
@@ -257,8 +259,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "json" to boolean false',
@@ -281,7 +283,7 @@ describe('set command', () => {
 							});
 						});
 						Given('a variable "name"', given.aVariable, () => {
-							Given('a value "my_custom_lisky"', given.aValue, () => {
+							Given('values "my_custom_lisky"', given.values, () => {
 								Given(
 									'the config file cannot be written',
 									given.theConfigFileCannotBeWritten,
@@ -291,8 +293,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -307,12 +309,12 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config variable "name" to the value',
-															then.itShouldUpdateTheConfigVariableToTheValue,
+															'it should update the config variable "name" to the first value',
+															then.itShouldUpdateTheConfigVariableToTheFirstValue,
 														);
 														Then(
 															'it should resolve to an object with warning "Config file could not be written: your changes will not be persisted."',
@@ -337,12 +339,12 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config variable "name" to the value',
-															then.itShouldUpdateTheConfigVariableToTheValue,
+															'it should update the config variable "name" to the first value',
+															then.itShouldUpdateTheConfigVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -361,12 +363,12 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config variable "name" to the value',
-															then.itShouldUpdateTheConfigVariableToTheValue,
+															'it should update the config variable "name" to the first value',
+															then.itShouldUpdateTheConfigVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -387,8 +389,8 @@ describe('set command', () => {
 						Given('a variable "pretty"', given.aVariable, () => {
 							Given('an unknown value "xxx"', given.anUnknownValue, () => {
 								When(
-									'the action is called with the variable and the value',
-									when.theActionIsCalledWithTheVariableAndTheValue,
+									'the action is called with the variable and the values',
+									when.theActionIsCalledWithTheVariableAndTheValues,
 									() => {
 										Then(
 											'it should reject with validation error and message "Value must be a boolean."',
@@ -397,7 +399,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "true"', given.aValue, () => {
+							Given('values "true"', given.values, () => {
 								Given(
 									'the config file cannot be written',
 									given.theConfigFileCannotBeWritten,
@@ -407,8 +409,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -423,8 +425,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean true',
@@ -453,8 +455,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean true',
@@ -477,8 +479,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean true',
@@ -499,7 +501,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "false"', given.aValue, () => {
+							Given('values "false"', given.values, () => {
 								Given(
 									'the config file cannot be written',
 									given.theConfigFileCannotBeWritten,
@@ -509,8 +511,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -525,8 +527,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean false',
@@ -555,8 +557,8 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean false',
@@ -579,8 +581,8 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
 															'it should update the config variable "pretty" to boolean false',
@@ -602,11 +604,239 @@ describe('set command', () => {
 								);
 							});
 						});
+						Given('a variable "api.nodes"', given.aVariable, () => {
+							Given(
+								'values "localhost" and "http://127.0.0.1"',
+								given.values,
+								() => {
+									Given(
+										'the config file can be written',
+										given.theConfigFileCanBeWritten,
+										() => {
+											Given(
+												'Vorpal is in non-interactive mode',
+												given.vorpalIsInNonInteractiveMode,
+												() => {
+													When(
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
+														() => {
+															Then(
+																'it should update the config nested variable "api.nodes" to the values',
+																then.itShouldUpdateTheConfigNestedVariableToTheValues,
+															);
+															Then(
+																'it should write the updated config to the config file',
+																then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+															);
+															Then(
+																'it should resolve to an object with message "Successfully set api.nodes to localhost,http://127.0.0.1."',
+																then.itShouldResolveToAnObjectWithMessage,
+															);
+														},
+													);
+												},
+											);
+											Given(
+												'Vorpal is in interactive mode',
+												given.vorpalIsInInteractiveMode,
+												() => {
+													When(
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
+														() => {
+															Then(
+																'it should update the config nested variable "api.nodes" to the values',
+																then.itShouldUpdateTheConfigNestedVariableToTheValues,
+															);
+															Then(
+																'it should write the updated config to the config file',
+																then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+															);
+															Then(
+																'it should resolve to an object with message "Successfully set api.nodes to localhost,http://127.0.0.1."',
+																then.itShouldResolveToAnObjectWithMessage,
+															);
+														},
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+							Given('values "http://localhost:4000"', given.values, () => {
+								Given(
+									'the config file can be written',
+									given.theConfigFileCanBeWritten,
+									() => {
+										Given(
+											'Vorpal is in non-interactive mode',
+											given.vorpalIsInNonInteractiveMode,
+											() => {
+												When(
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
+													() => {
+														Then(
+															'it should update the config nested variable "api.nodes" to the values',
+															then.itShouldUpdateTheConfigNestedVariableToTheValues,
+														);
+														Then(
+															'it should write the updated config to the config file',
+															then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+														);
+														Then(
+															'it should resolve to an object with message "Successfully set api.nodes to http://localhost:4000."',
+															then.itShouldResolveToAnObjectWithMessage,
+														);
+													},
+												);
+											},
+										);
+										Given(
+											'Vorpal is in interactive mode',
+											given.vorpalIsInInteractiveMode,
+											() => {
+												When(
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
+													() => {
+														Then(
+															'it should update the config nested variable "api.nodes" to the values',
+															then.itShouldUpdateTheConfigNestedVariableToTheValues,
+														);
+														Then(
+															'it should write the updated config to the config file',
+															then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+														);
+														Then(
+															'it should resolve to an object with message "Successfully set api.nodes to http://localhost:4000."',
+															then.itShouldResolveToAnObjectWithMessage,
+														);
+													},
+												);
+											},
+										);
+									},
+								);
+							});
+							Given('values ""', given.values, () => {
+								Given(
+									'the config file can be written',
+									given.theConfigFileCanBeWritten,
+									() => {
+										Given(
+											'Vorpal is in non-interactive mode',
+											given.vorpalIsInNonInteractiveMode,
+											() => {
+												When(
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
+													() => {
+														Then(
+															'it should update the config nested variable "api.nodes" to the values',
+															then.itShouldUpdateTheConfigNestedVariableToTheValues,
+														);
+														Then(
+															'it should write the updated config to the config file',
+															then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+														);
+														Then(
+															'it should resolve to an object with message "Successfully reset api.nodes."',
+															then.itShouldResolveToAnObjectWithMessage,
+														);
+													},
+												);
+											},
+										);
+										Given(
+											'Vorpal is in interactive mode',
+											given.vorpalIsInInteractiveMode,
+											() => {
+												When(
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
+													() => {
+														Then(
+															'it should update the config nested variable "api.nodes" to the values',
+															then.itShouldUpdateTheConfigNestedVariableToTheValues,
+														);
+														Then(
+															'it should write the updated config to the config file',
+															then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+														);
+														Then(
+															'it should resolve to an object with message "Successfully reset api.nodes."',
+															then.itShouldResolveToAnObjectWithMessage,
+														);
+													},
+												);
+											},
+										);
+									},
+								);
+							});
+							Given(
+								'the config file can be written',
+								given.theConfigFileCanBeWritten,
+								() => {
+									Given(
+										'Vorpal is in non-interactive mode',
+										given.vorpalIsInNonInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the values',
+												when.theActionIsCalledWithTheVariableAndTheValues,
+												() => {
+													Then(
+														'it should update the config nested variable "api.nodes" to empty array',
+														then.itShouldUpdateTheConfigNestedVariableToEmptyArray,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully reset api.nodes."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+									Given(
+										'Vorpal is in interactive mode',
+										given.vorpalIsInInteractiveMode,
+										() => {
+											When(
+												'the action is called with the variable and the values',
+												when.theActionIsCalledWithTheVariableAndTheValues,
+												() => {
+													Then(
+														'it should update the config nested variable "api.nodes" to empty array',
+														then.itShouldUpdateTheConfigNestedVariableToEmptyArray,
+													);
+													Then(
+														'it should write the updated config to the config file',
+														then.itShouldWriteTheUpdatedConfigToTheConfigFile,
+													);
+													Then(
+														'it should resolve to an object with message "Successfully reset api.nodes."',
+														then.itShouldResolveToAnObjectWithMessage,
+													);
+												},
+											);
+										},
+									);
+								},
+							);
+						});
 						Given('a variable "api.network"', given.aVariable, () => {
 							Given('an unknown value "xxx"', given.anUnknownValue, () => {
 								When(
-									'the action is called with the variable and the value',
-									when.theActionIsCalledWithTheVariableAndTheValue,
+									'the action is called with the variable and the values',
+									when.theActionIsCalledWithTheVariableAndTheValues,
 									() => {
 										Then(
 											'it should reject with validation error and message "Value must be a hex string with 64 characters, or one of main, test or beta."',
@@ -616,12 +846,12 @@ describe('set command', () => {
 								);
 							});
 							Given(
-								'a value "ed14889723f24ecc54871d058d98ce91ff2f97"',
-								given.aValue,
+								'values "ed14889723f24ecc54871d058d98ce91ff2f97"',
+								given.values,
 								() => {
 									When(
-										'the action is called with the variable and the value',
-										when.theActionIsCalledWithTheVariableAndTheValue,
+										'the action is called with the variable and the values',
+										when.theActionIsCalledWithTheVariableAndTheValues,
 										() => {
 											Then(
 												'it should reject with validation error and message "Value must be a hex string with 64 characters, or one of main, test or beta."',
@@ -632,12 +862,12 @@ describe('set command', () => {
 								},
 							);
 							Given(
-								'a value "ed14889723f24ecc54871d058xxxxxxxxxxxxxxxxxxxxxxxxxba2b7b70ad2500"',
-								given.aValue,
+								'values "ed14889723f24ecc54871d058xxxxxxxxxxxxxxxxxxxxxxxxxba2b7b70ad2500"',
+								given.values,
 								() => {
 									When(
-										'the action is called with the variable and the value',
-										when.theActionIsCalledWithTheVariableAndTheValue,
+										'the action is called with the variable and the values',
+										when.theActionIsCalledWithTheVariableAndTheValues,
 										() => {
 											Then(
 												'it should reject with validation error and message "Value must be a hex string with 64 characters, or one of main, test or beta."',
@@ -647,7 +877,7 @@ describe('set command', () => {
 									);
 								},
 							);
-							Given('a value "main"', given.aValue, () => {
+							Given('values "main"', given.values, () => {
 								Given(
 									'the config file can be written',
 									given.theConfigFileCanBeWritten,
@@ -657,12 +887,12 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -681,12 +911,12 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -703,7 +933,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "test"', given.aValue, () => {
+							Given('values "test"', given.values, () => {
 								Given(
 									'the config file can be written',
 									given.theConfigFileCanBeWritten,
@@ -713,12 +943,12 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -737,12 +967,12 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -759,7 +989,7 @@ describe('set command', () => {
 									},
 								);
 							});
-							Given('a value "beta"', given.aValue, () => {
+							Given('values "beta"', given.values, () => {
 								Given(
 									'the config file can be written',
 									given.theConfigFileCanBeWritten,
@@ -769,12 +999,12 @@ describe('set command', () => {
 											given.vorpalIsInNonInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -793,12 +1023,12 @@ describe('set command', () => {
 											given.vorpalIsInInteractiveMode,
 											() => {
 												When(
-													'the action is called with the variable and the value',
-													when.theActionIsCalledWithTheVariableAndTheValue,
+													'the action is called with the variable and the values',
+													when.theActionIsCalledWithTheVariableAndTheValues,
 													() => {
 														Then(
-															'it should update the config nested variable "api.network" to the value',
-															then.itShouldUpdateTheConfigNestedVariableToTheValue,
+															'it should update the config nested variable "api.network" to the first value',
+															then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 														);
 														Then(
 															'it should write the updated config to the config file',
@@ -816,8 +1046,8 @@ describe('set command', () => {
 								);
 							});
 							Given(
-								'a value "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"',
-								given.aValue,
+								'values "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"',
+								given.values,
 								() => {
 									Given(
 										'the config file cannot be written',
@@ -828,8 +1058,8 @@ describe('set command', () => {
 												given.vorpalIsInNonInteractiveMode,
 												() => {
 													When(
-														'the action is called with the variable and the value',
-														when.theActionIsCalledWithTheVariableAndTheValue,
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
 														() => {
 															Then(
 																'it should reject with file system error and message "Config file could not be written: your changes will not be persisted."',
@@ -844,12 +1074,12 @@ describe('set command', () => {
 												given.vorpalIsInInteractiveMode,
 												() => {
 													When(
-														'the action is called with the variable and the value',
-														when.theActionIsCalledWithTheVariableAndTheValue,
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
 														() => {
 															Then(
-																'it should update the config nested variable "api.network" to the value',
-																then.itShouldUpdateTheConfigNestedVariableToTheValue,
+																'it should update the config nested variable "api.network" to the first value',
+																then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 															);
 															Then(
 																'it should resolve to an object with warning "Config file could not be written: your changes will not be persisted."',
@@ -874,12 +1104,12 @@ describe('set command', () => {
 												given.vorpalIsInNonInteractiveMode,
 												() => {
 													When(
-														'the action is called with the variable and the value',
-														when.theActionIsCalledWithTheVariableAndTheValue,
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
 														() => {
 															Then(
-																'it should update the config nested variable "api.network" to the value',
-																then.itShouldUpdateTheConfigNestedVariableToTheValue,
+																'it should update the config nested variable "api.network" to the first value',
+																then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 															);
 															Then(
 																'it should write the updated config to the config file',
@@ -898,12 +1128,12 @@ describe('set command', () => {
 												given.vorpalIsInInteractiveMode,
 												() => {
 													When(
-														'the action is called with the variable and the value',
-														when.theActionIsCalledWithTheVariableAndTheValue,
+														'the action is called with the variable and the values',
+														when.theActionIsCalledWithTheVariableAndTheValues,
 														() => {
 															Then(
-																'it should update the config nested variable "api.network" to the value',
-																then.itShouldUpdateTheConfigNestedVariableToTheValue,
+																'it should update the config nested variable "api.network" to the first value',
+																then.itShouldUpdateTheConfigNestedVariableToTheFirstValue,
 															);
 															Then(
 																'it should write the updated config to the config file',
